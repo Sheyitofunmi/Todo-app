@@ -1,77 +1,3 @@
-// // Task.tsx
-// import React, { useState } from "react";
-
-// interface TaskProps {
-//   task: {
-//     id: number;
-//     text: string;
-//     completed: boolean;
-//   };
-//   onToggle: () => void;
-//   onEdit: (newText: string) => void;
-// }
-
-// const Task: React.FC<TaskProps> = ({ task, onToggle, onEdit }) => {
-//   const [editing, setEditing] = useState(false);
-//   const [text, setText] = useState(task.text);
-
-//   const handleToggle = () => {
-//     onToggle();
-//   };
-
-//   const handleDoubleClick = () => {
-//     setEditing(true);
-//   };
-
-//   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-//     setText(e.target.value);
-//   };
-
-//   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-//     if (e.key === "Enter") {
-//       onEdit(text);
-//       setEditing(false);
-//     }
-//   };
-
-//   return (
-//     <div className="flex items-center">
-//       <input
-//         type="checkbox"
-//         checked={task.completed}
-//         onChange={handleToggle}
-//         className="mr-2"
-//       />
-//       {editing ? (
-//         <input
-//           type="text"
-//           value={text}
-//           onChange={handleChange}
-//           onKeyDown={handleKeyDown}
-//           onBlur={() => {
-//             onEdit(text);
-//             setEditing(false);
-//           }}
-//           autoFocus
-//           className="flex-1 rounded p-2 focus:outline-none focus:ring focus:border-blue-300"
-//         />
-//       ) : (
-//         <div
-//           onDoubleClick={handleDoubleClick}
-//           className={`flex-1 ${
-//             task.completed ? "line-through text-gray-400" : ""
-//           }`}
-//         >
-//           {task.text}
-//         </div>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default Task;
-// Task.tsx
-// Task.tsx
 import React from "react";
 
 interface TaskProps {
@@ -90,26 +16,53 @@ const Task: React.FC<TaskProps> = ({ task, onToggle, onEditClick }) => {
   };
 
   return (
-    <div className="flex items-center mb-2">
-      <input
-        type="checkbox"
-        checked={task.completed}
-        onChange={handleToggle}
-        className="mr-2 h-4 w-4 text-blue-600"
-      />
-      <div
-        className={`flex-1 ${
-          task.completed ? "line-through text-gray-400" : ""
-        }`}
-      >
-        {task.text}
+    <div
+      className="flex items-center justify-between mb-5 mx-[10px] py-3 bg-[#fff] px-3 rounded-md"
+      style={{
+        boxShadow: "0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)",
+      }}
+    >
+      <div className="flex gap-4">
+        <div
+          className="rounded-full border-2  flex items-center justify-center mr-2"
+          style={{
+            width: "1.5rem",
+            height: "1.5rem",
+            backgroundColor: task.completed ? "#53DA69" : "transparent",
+            borderColor: task.completed ? "#53DA69" : "#071D55",
+          }}
+          onClick={handleToggle}
+        >
+          {task.completed && (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="#399649"
+              width="18px"
+              height="18px"
+            >
+              <path d="M0 0h24v24H0z" fill="none" />
+              <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" />
+            </svg>
+          )}
+        </div>
+        <div
+          className={` text-[#071D55] ${
+            task.completed ? "line-through text-gray-400" : ""
+          }`}
+        >
+          {task.text}
+        </div>
       </div>
-      <button
-        onClick={onEditClick}
-        className="px-2 py-1 rounded bg-blue-500 text-white"
-      >
-        Edit
-      </button>
+
+      <div>
+        <button
+          onClick={onEditClick}
+          className="px-2 py-1 rounded bg-white text-[#071D55] border-[1px] border-[#071D55]  "
+        >
+          Edit
+        </button>
+      </div>
     </div>
   );
 };
