@@ -89,6 +89,6 @@ Contributions are welcome! If you'd like to add new features, improve existing o
 
 ---
 
-Feel free to customize this README to better fit your project's specific details and requirements.
+
 
   
